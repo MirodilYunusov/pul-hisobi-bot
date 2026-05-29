@@ -21,12 +21,23 @@ def malumot_saqlа(data):
 # /start
 @bot.message_handler(commands=["start"])
 def start(message):
-    bot.send_message(message.chat.id, 
-        "💰 Pul Hisobi Botiga xush kelibsiz!\n\n"
-        "📥 /kirim — pul kirdi\n"
-        "📤 /chiqim — pul chiqdi\n"
-        "📊 /hisobot — hisobotni ko'rish\n"
-        "🗑 /tozala — hammasini o'chirish")
+    keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    keyboard.row("📥 Kirim", "📤 Chiqim")
+    keyboard.row("📊 Hisobot", "🗑 Tozala")
+    bot.send_message(message.chat.id,
+        "💰 Pul Hisobi Botiga xush kelibsiz!",
+        reply_markup=keyboard)
+    
+    @bot.message_handler(func=lambda m: m.text in ["📥 Kirim", "📤 Chiqim", "📊 Hisobot", "🗑 Tozala"])
+def tugma_handler(message):
+    if message.text == "📥 Kirim":
+        kirim_boshlash(message)
+    elif message.text == "📤 Chiqim":
+        chiqim_boshlash(message)
+    elif message.text == "📊 Hisobot":
+        hisobot(message)
+    elif message.text == "🗑 Tozala":
+        tozala(message)
 
 # /kirim
 @bot.message_handler(commands=["kirim"])
