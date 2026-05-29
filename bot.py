@@ -27,8 +27,8 @@ def start(message):
     bot.send_message(message.chat.id,
         "💰 Pul Hisobi Botiga xush kelibsiz!",
         reply_markup=keyboard)
-    
-    @bot.message_handler(func=lambda m: m.text in ["📥 Kirim", "📤 Chiqim", "📊 Hisobot", "🗑 Tozala"])
+
+@bot.message_handler(func=lambda m: m.text in ["📥 Kirim", "📤 Chiqim", "📊 Hisobot", "🗑 Tozala"])
 def tugma_handler(message):
     if message.text == "📥 Kirim":
         kirim_boshlash(message)
